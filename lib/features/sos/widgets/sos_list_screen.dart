@@ -8,11 +8,24 @@ import '../models/sos_header.model.dart';
 import '../providers/list/sos_list.provider.dart';
 
 // TODO test: ha bekerül egy új sos, megjelenik a képernyőn a listában?
-class SosListScreen extends ConsumerWidget {
+class SosListScreen extends ConsumerStatefulWidget {
   const SosListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SosListScreen> createState() => _SosListScreenState();
+}
+
+class _SosListScreenState extends ConsumerState<SosListScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(sosListProvider.notifier).refreshSos();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final sosList = ref.watch(sosListProvider);
 
     return sosList.when(

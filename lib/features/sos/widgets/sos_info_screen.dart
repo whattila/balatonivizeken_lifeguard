@@ -85,21 +85,23 @@ class SosInfoBody extends ConsumerWidget {
           style: const TextStyle(fontSize: 20.0),
         ),
         const SizedBox(height: 12.0), // Kis hely a sorok között
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start, // Középre igazítjuk a sort
-          children: [
-            const Text(
-              "Hajó színe: ",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Container(
-              color: Color(int.parse(boat.boatColor!)),
-              width: 50,
-              height: 30,
-            ),
-          ],
-        ),
-        const SizedBox(height: 12.0), // Kis hely a sorok között
+        if (boat.boatColor != null)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start, // Középre igazítjuk a sort
+            children: [
+              const Text(
+                "Hajó színe: ",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Container(
+                color: Color(int.parse(boat.boatColor!)),
+                width: 50,
+                height: 30,
+              ),
+            ],
+          ),
+        if (boat.boatColor != null)
+          const SizedBox(height: 12.0), // Kis hely a sorok között
         GestureDetector(
           child: Text(
             sos.phoneNumber,
